@@ -11,10 +11,10 @@ export class AppComponent {
   center: LatLng;
   places: any;
 
-  setCenter(value: LatLng) {
+  setCenter = (value: LatLng): void => {
     this.center = value;
-  }
-  setPlaces(value: Partial<{ geometry: { location: LatLng }; place_id: string }>[]) {
+  };
+  setPlaces = (value: Partial<{ geometry: { location: LatLng }; place_id: string }>[]): void => {
     this.places = value;
-  }
+  };
 }

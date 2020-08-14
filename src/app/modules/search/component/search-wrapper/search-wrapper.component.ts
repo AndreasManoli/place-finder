@@ -1,6 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { AppConfig } from 'src/app/interfaces/config.interface';
 import { LatLng } from 'src/app/modules/auto-complete/interfaces/latLng.interface';
+import { APP_CONFIG } from 'src/app/providers/config.provider';
 import { SearchService } from '../../services/search.service';
 
 @Component({
@@ -9,39 +11,38 @@ import { SearchService } from '../../services/search.service';
   styleUrls: ['./search-wrapper.component.scss']
 })
 @UntilDestroy()
-export class SearchWrapperComponent implements OnInit {
-  constructor(private searchService: SearchService) {}
+export class SearchWrapperComponent {
   @Output() center: EventEmitter<LatLng> = new EventEmitter();
   @Output() places: EventEmitter<any> = new EventEmitter();
   latLng: LatLng = null;
   type: string = null;
-  radius = 10;
+  radius = this.config.radius.default;
 
-  ngOnInit(): void {}
+  constructor(private searchService: SearchService, @Inject(APP_CONFIG) private config: AppConfig) {}
 
-  setCenter(latLng: LatLng) {
+  setCenter = (latLng: LatLng): void => {
     this.searchService
       .getPlacesByLatLng(latLng, this.radius)
       .pipe(untilDestroyed(this))
       .subscribe(x => this.places.emit(x));
     this.center.emit(latLng);
     this.latLng = latLng;
-  }
+  };
 
-  setPlaces(type) {
+  setPlaces = (type: string): void => {
     this.searchService
       .getPlacesByLatLngAndType(this.latLng, type, this.radius)
       .pipe(untilDestroyed(this))
       .subscribe(x => this.places.emit(x));
     this.type = type;
-  }
+  };
 
-  setRange(value: number) {
+  setRange = (value: number): void => {
     this.radius = value;
     if (!!this.latLng && !!this.type) {
       this.setPlaces(this.type);
     } else if (!!this.latLng) {
       this.setCenter(this.latLng);
     }
-  }
+  };
 }

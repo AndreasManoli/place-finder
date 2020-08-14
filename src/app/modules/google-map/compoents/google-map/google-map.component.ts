@@ -38,16 +38,16 @@ export class GoogleMapComponent {
       .pipe(untilDestroyed(this))
       .subscribe(x => {
         this.content = {
-          name: x.name,
-          address: x.formatted_address,
-          profilePhoto: x.icon,
-          phone: x.formatted_phone_number,
-          rating: x.rating,
+          name: x?.name,
+          address: x?.formatted_address,
+          profilePhoto: x?.icon,
+          phone: x?.formatted_phone_number,
+          rating: x?.rating,
           openNow: x?.opening_hours?.open_now,
-          photos: _.map(x.photos, z => this.config.urls.photo + z.photo_reference + '&key=' + this.config.general.apiKey)
+          photos: _.map(x?.photos, z => this.config.urls.photo + z.photo_reference + '&key=' + this.config.general.apiKey)
         };
       });
-    this.infoWindow.open(marker);
+    this.infoWindow?.open(marker);
   };
 
   trackById = (index: number, value: string): string => index + value;
