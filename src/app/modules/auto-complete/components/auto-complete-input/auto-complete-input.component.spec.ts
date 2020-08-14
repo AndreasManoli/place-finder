@@ -1,5 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,7 +12,7 @@ import { AutoCompleteInputComponent } from './auto-complete-input.component';
 
 class MockAutoCompleteService {
   getPredictions = (value: string): Observable<Prediction[]> => of(null);
-  getDetails = (placeId: string): Observable<LatLng> => of(null);
+  getLatLng = (placeId: string): Observable<LatLng> => of(null);
 }
 
 describe('AutoCompleteInputComponent', () => {
@@ -45,11 +45,11 @@ describe('AutoCompleteInputComponent', () => {
     expect(component.Search).toEqual('test ');
   });
 
-  it('should set setDetails ', () => {
+  it('should set setDetails ', fakeAsync(() => {
     const spy = spyOn(service, 'getLatLng').and.returnValue(of(null));
     component.setDetails('test');
-    expect(component.Search).toEqual('test ');
-  });
+    expect(component.Search).toEqual('');
+  }));
 
   it('should trackById  return the placeId', () => {
     expect(component.trackById(0, { placeId: 'placeId' } as any)).toEqual('placeId');
