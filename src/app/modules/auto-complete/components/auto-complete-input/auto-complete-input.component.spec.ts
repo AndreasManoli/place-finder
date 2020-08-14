@@ -18,7 +18,7 @@ class MockAutoCompleteService {
 describe('AutoCompleteInputComponent', () => {
   let component: AutoCompleteInputComponent;
   let fixture: ComponentFixture<AutoCompleteInputComponent>;
-
+  let service: AutoCompleteService;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AutoCompleteInputComponent],
@@ -31,6 +31,7 @@ describe('AutoCompleteInputComponent', () => {
     fixture = TestBed.createComponent(AutoCompleteInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    service = TestBed.inject(AutoCompleteService);
   });
 
   it('should create', () => {
@@ -41,6 +42,12 @@ describe('AutoCompleteInputComponent', () => {
     component.Search = 'test';
     expect(component.Search).toEqual('test');
     component.Search = 'test ';
+    expect(component.Search).toEqual('test ');
+  });
+
+  it('should set setDetails ', () => {
+    const spy = spyOn(service, 'getLatLng').and.returnValue(of(null));
+    component.setDetails('test');
     expect(component.Search).toEqual('test ');
   });
 
