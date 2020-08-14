@@ -18,7 +18,7 @@ export class GoogleMapComponent {
   @Input() set Center(value: LatLng) {
     this.center = value;
   }
-  @Input() set PointsOfInterest(value) {
+  @Input() set PointsOfInterest(value: Partial<{ geometry: { location: LatLng }; place_id: string }>) {
     this.data = value;
   }
 
@@ -26,14 +26,17 @@ export class GoogleMapComponent {
 
   data: Partial<{}>;
   center: google.maps.LatLngLiteral;
+  options: google.maps.MapOptions = this.config.mapOptions;
 
-  options: google.maps.MapOptions = {
-    disableDoubleClickZoom: true,
-    maxZoom: 15,
-    minZoom: 8
-  };
-
-  content: { name: string; photos: any; openNow: boolean; profilePhoto: string; address: string; phone: string; rating: string } = null;
+  content: {
+    name: string;
+    photos: Partial<[]>;
+    openNow: boolean;
+    profilePhoto: string;
+    address: string;
+    phone: string;
+    rating: string;
+  } = null;
 
   openInfoWindow = (marker: MapMarker, item: { place_id: string }): void => {
     this.content = null;

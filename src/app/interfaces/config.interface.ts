@@ -14,4 +14,5 @@ export interface AppConfig {
     max: number;
     default: number;
   };
+  mapOptions: google.maps.MapOptions;
 }
