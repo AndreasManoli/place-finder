@@ -5,6 +5,7 @@ import * as _ from 'lodash-es';
 import { AppConfig } from 'src/app/interfaces/config.interface';
 import { LatLng } from 'src/app/modules/auto-complete/interfaces/latLng.interface';
 import { APP_CONFIG } from 'src/app/providers/config.provider';
+import { PlaceDetails } from '../../interfaces/place-details.interface';
 import { MapsService } from '../../services/maps.service';
 @Component({
   selector: 'app-google-map',
@@ -28,15 +29,7 @@ export class GoogleMapComponent {
   center: google.maps.LatLngLiteral;
   options: google.maps.MapOptions = this.config.mapOptions;
 
-  content: {
-    name: string;
-    photos: Partial<[]>;
-    openNow: boolean;
-    profilePhoto: string;
-    address: string;
-    phone: string;
-    rating: string;
-  } = null;
+  content: PlaceDetails = null;
 
   openInfoWindow = (marker: MapMarker, item: { place_id: string }): void => {
     this.content = null;
