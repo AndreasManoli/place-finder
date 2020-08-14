@@ -7,21 +7,21 @@
           {{content?.name}}
         </h3>
         <div *ngIf="!!content?.address" class="info">
-          <h5>{{'ADDRESS' | translate}}</h5>
+          <h4>{{'ADDRESS' | translate}}</h4>
           {{content?.address}}
         </div>
         <div *ngIf="content?.openNow ===true || content?.openNow===false" class="info">
-          <h5>{{'HOURS' | translate}}</h5>
+          <h4>{{'HOURS' | translate}}</h4>
           <div [class]="content?.openNow ? 'open':'closed'">
             {{content?.openNow ? ('OPEN' | translate): ('CLOSED' |translate )}}
           </div>
         </div>
         <div *ngIf="!!content?.phone" class="info">
-          <h5>{{'PHONE' | translate}}</h5>
+          <h4>{{'PHONE' | translate}}</h4>
           {{content.phone}}
         </div>
         <div *ngIf="!!content?.rating" class="info">
-          <h5>{{'RATING' | translate}}</h5>
+          <h4>{{'RATING' | translate}}</h4>
           {{content.rating}}
         </div>
 
