@@ -15,4 +15,5 @@ export interface AppConfig {
     default: number;
   };
   mapOptions: google.maps.MapOptions;
+  types: string[];
 }
