@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import * as _ from 'lodash-es';
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
 import { AppConfig } from 'src/app/interfaces/config.interface';
 import { APP_CONFIG } from 'src/app/providers/config.provider';
 import { LatLng } from '../interfaces/latLng.interface';
@@ -24,11 +24,19 @@ export class AutoCompleteService {
               return { description: z.description, placeId: z.place_id };
             })
           )
-        )
+        ),
+        catchError(error => {
+          console.log(error);
+          return of([]);
+        })
       );
 
   getLatLng = (placeId: string): Observable<LatLng> =>
-    this.http
-      .get<Partial<{ result: { geometry: { location: LatLng } } }>>(`${this.config.urls.placeLatLng}&place_id=${placeId}`)
-      .pipe(switchMap(x => of(x.result.geometry.location)));
+    this.http.get<Partial<{ result: { geometry: { location: LatLng } } }>>(`${this.config.urls.placeLatLng}&place_id=${placeId}`).pipe(
+      switchMap(x => of(x.result.geometry.location)),
+      catchError(error => {
+        console.log(error);
+        return of({ lat: 0, lng: 0 });
+      })
+    );
 }

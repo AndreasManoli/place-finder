@@ -1,7 +1,8 @@
 import { Component, Inject, Input, ViewChild } from '@angular/core';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import * as _ from 'lodash-es';
+import { Subscription } from 'rxjs';
 import { AppConfig } from 'src/app/interfaces/config.interface';
 import { LatLng } from 'src/app/modules/auto-complete/interfaces/latLng.interface';
 import { APP_CONFIG } from 'src/app/providers/config.provider';
@@ -12,7 +13,7 @@ import { MapsService } from '../../services/maps.service';
   templateUrl: './google-map.component.html',
   styleUrls: ['./google-map.component.scss']
 })
-@UntilDestroy()
+@UntilDestroy({ checkProperties: true })
 export class GoogleMapComponent {
   @ViewChild(MapInfoWindow) infoWindow: MapInfoWindow;
 
@@ -23,30 +24,28 @@ export class GoogleMapComponent {
     this.data = value;
   }
 
-  constructor(private mapsService: MapsService, @Inject(APP_CONFIG) private config: AppConfig) {}
-
   data: Partial<{ geometry: { location: LatLng }; place_id: string }>[];
   center: google.maps.LatLngLiteral;
   options: google.maps.MapOptions = this.config.mapOptions;
-
   content: PlaceDetails = null;
+  private subscription: Subscription;
+
+  constructor(private mapsService: MapsService, @Inject(APP_CONFIG) private config: AppConfig) {}
 
   openInfoWindow = (marker: MapMarker, item: { place_id: string }): void => {
     this.content = null;
-    this.mapsService
-      .getDetails(item.place_id)
-      .pipe(untilDestroyed(this))
-      .subscribe(x => {
-        this.content = {
-          name: x?.name,
-          address: x?.formatted_address,
-          profilePhoto: x?.icon,
-          phone: x?.formatted_phone_number,
-          rating: x?.rating,
-          openNow: x?.opening_hours?.open_now,
-          photos: _.map(x?.photos, z => this.config.urls.photo + z.photo_reference + '&key=' + this.config.general.apiKey)
-        };
-      });
+    _.attempt(() => this.subscription?.unsubscribe());
+    this.subscription = this.mapsService.getDetails(item.place_id).subscribe(x => {
+      this.content = {
+        name: x?.name,
+        address: x?.formatted_address,
+        profilePhoto: x?.icon,
+        phone: x?.formatted_phone_number,
+        rating: x?.rating,
+        openNow: x?.opening_hours?.open_now,
+        photos: _.map(x?.photos, z => this.config.urls.photo + z.photo_reference + '&key=' + this.config.general.apiKey)
+      };
+    });
     this.infoWindow?.open(marker);
   };
 

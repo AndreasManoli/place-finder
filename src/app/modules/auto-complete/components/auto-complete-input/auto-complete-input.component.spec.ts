@@ -3,6 +3,8 @@ import { async, ComponentFixture, fakeAsync, TestBed } from '@angular/core/testi
 import { FormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { LatLng } from '../../interfaces/latLng.interface';
@@ -22,7 +24,16 @@ describe('AutoCompleteInputComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AutoCompleteInputComponent],
-      imports: [HttpClientTestingModule, TranslateModule.forRoot({}), MatIconModule, FormsModule, MatAutocompleteModule],
+      imports: [
+        HttpClientTestingModule,
+        TranslateModule.forRoot({}),
+        MatIconModule,
+        FormsModule,
+        MatAutocompleteModule,
+        MatTooltipModule,
+        BrowserAnimationsModule,
+        MatIconModule
+      ],
       providers: [{ provide: AutoCompleteService, useClass: MockAutoCompleteService }]
     }).compileComponents();
   }));

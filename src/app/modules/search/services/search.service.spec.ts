@@ -22,18 +22,6 @@ describe('SearchService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should getPlacesByLatLng execute get call', fakeAsync(() => {
-    let result = null;
-    const spy = spyOn(http, 'get').and.returnValue(of({ results: [{}] }));
-    service.getPlacesByLatLng({ lat: 1, lng: 1 }, 0).subscribe(x => (result = x));
-    expect(spy).toHaveBeenCalled();
-    expect(result).toEqual([{}]);
-
-    tick(100);
-    flushMicrotasks();
-    discardPeriodicTasks();
-  }));
-
   it('should getPlacesByLatLngAndType execute get call', fakeAsync(() => {
     let result = null;
 
