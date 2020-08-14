@@ -19,13 +19,13 @@ export class GoogleMapComponent {
   @Input() set Center(value: LatLng) {
     this.center = value;
   }
-  @Input() set PointsOfInterest(value: Partial<{ geometry: { location: LatLng }; place_id: string }>) {
+  @Input() set PointsOfInterest(value: Partial<{ geometry: { location: LatLng }; place_id: string }>[]) {
     this.data = value;
   }
 
   constructor(private mapsService: MapsService, @Inject(APP_CONFIG) private config: AppConfig) {}
 
-  data: Partial<{}>;
+  data: Partial<{ geometry: { location: LatLng }; place_id: string }>[];
   center: google.maps.LatLngLiteral;
   options: google.maps.MapOptions = this.config.mapOptions;
 

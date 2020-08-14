@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { map } from 'lodash-es';
+import * as _ from 'lodash-es';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AppConfig } from 'src/app/interfaces/config.interface';
@@ -16,7 +16,7 @@ export class SearchService {
     this.http.get<any>(`${this.config.urls.nearBySearch}?location=${value.lat},${value.lng}&radius=${radius}`).pipe(
       switchMap(x =>
         of(
-          map(x.results, z => {
+          _.map(x.results, z => {
             return z;
           })
         )
@@ -27,7 +27,7 @@ export class SearchService {
     this.http.get<any>(`${this.config.urls.nearBySearch}?location=${value.lat},${value.lng}&type=${type}&radius=${radius}`).pipe(
       switchMap(x =>
         of(
-          map(x.results, z => {
+          _.map(x.results, z => {
             return z;
           })
         )

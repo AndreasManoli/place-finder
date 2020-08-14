@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { map } from 'lodash-es';
+import * as _ from 'lodash-es';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AppConfig } from 'src/app/interfaces/config.interface';
@@ -20,7 +20,7 @@ export class AutoCompleteService {
       .pipe(
         switchMap(x =>
           of(
-            map(x.predictions, z => {
+            _.map(x.predictions, z => {
               return { description: z.description, placeId: z.place_id };
             })
           )

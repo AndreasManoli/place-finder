@@ -14,7 +14,7 @@ export class AppComponent {
   setCenter(value: LatLng) {
     this.center = value;
   }
-  setPlaces(value: LatLng) {
+  setPlaces(value: Partial<{ geometry: { location: LatLng }; place_id: string }>[]) {
     this.places = value;
   }
 }
