@@ -1,0 +1,17 @@
+<div class="header">
+  <h5 class="header-title">
+    {{'RADIUS' | translate}}
+  </h5>
+  <mat-icon [matTooltip]="'RADIUS_TOOLTIP' | translate" inline="true">info</mat-icon>
+</div>
+<div class="slider-wrapper">
+  <mat-slider
+    [disabled]="disabled"
+    (change)="radiusChange($event)"
+    thumbLabel
+    [displayWith]="formatLabel"
+    [value]="default"
+    [min]="min"
+    [max]="max"
+  ></mat-slider>
+</div>

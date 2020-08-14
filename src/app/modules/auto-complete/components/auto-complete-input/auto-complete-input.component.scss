@@ -1,0 +1,19 @@
+:host {
+  .header {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    > .header-title {
+      padding-right: 10px;
+    }
+  }
+
+  .auto-complete-wrapper {
+    display: flex;
+    justify-content: center;
+    .auto-complete {
+      width: 100%;
+      padding: 10px;
+    }
+  }
+}

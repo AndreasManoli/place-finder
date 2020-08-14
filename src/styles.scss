@@ -1,1 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@include mat-core();
+
+/* ======== Angular material custom themes ======== */
+$my-custom-primary: mat-palette($mat-deep-purple);
+$my-custom-accent: mat-palette($mat-pink);
+$my-custom-warn: mat-palette($mat-lime);
+
+$my-custom-theme: mat-dark-theme($my-custom-primary, $my-custom-accent, $my-custom-warn);
+
+@include angular-material-theme($my-custom-theme);
+
+.carousel {
+  img {
+    max-height: 100px;
+  }
+  .mat-tab-label {
+    min-height: 100px;
+    max-height: 100px;
+
+    min-width: 100px;
+    max-width: 100px;
+    border: 5px solid;
+  }
+  .mat-tab-label-content {
+    min-width: 100px;
+    min-height: 100px;
+  }
+  .mat-tab-header-pagination-chevron {
+    border-color: black;
+  }
+  .mat-tab-nav-bar,
+  .mat-tab-header {
+    border: 0;
+    .mat-tab-label {
+      min-width: 0;
+      padding: 0;
+    }
+    .mat-ink-bar {
+      display: none;
+    }
+  }
+}

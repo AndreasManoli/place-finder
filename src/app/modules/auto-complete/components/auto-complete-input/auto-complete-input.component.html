@@ -1,0 +1,21 @@
+<div class="header">
+  <h5 class="header-title">
+    {{'SEARCH_LOCATION' | translate}}
+  </h5>
+  <mat-icon [matTooltip]="'SEARCH_LOCATION_TOOLTIP' | translate" inline="true">info</mat-icon>
+</div>
+<div class="auto-complete-wrapper">
+  <mat-form-field class="auto-complete" appearance="outline">
+    <mat-icon matPrefix>search</mat-icon>
+    <input type="text" [placeholder]="'SEARCH' | translate" matInput [(ngModel)]="Search" [matAutocomplete]="auto" />
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option
+        (click)="setDetails(option?.placeId)"
+        [value]="option?.description"
+        *ngFor="let option of (options$ | async); trackBy: trackById"
+      >
+        {{option?.description }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>

@@ -1,0 +1,17 @@
+:host {
+  .header {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    > .header-title {
+      padding-right: 10px;
+    }
+  }
+  .mat-slider-horizontal {
+    width: 90%;
+  }
+  .slider-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+}

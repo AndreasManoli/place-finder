@@ -1,0 +1,17 @@
+{
+  "general": {
+    "apiKey": "AIzaSyC-FWbGivxcDm8EP2pV-Gi9nMyPmpaxYLo"
+  },
+  "urls": {
+    "placesAutoComplete": "api/place/autocomplete/json",
+    "placeLatLng": "api/place/details/json?fields=geometry",
+    "nearBySearch": "api/place/nearbysearch/json",
+    "placeDetails": "api/place/details/json?fields=name,rating,formatted_phone_number,formatted_address,rating,icon,photos,opening_hours",
+    "photo": "api/place/photo?maxwidth=400&photoreference="
+  },
+  "radius": {
+    "min": 1,
+    "max": 1000,
+    "default": 100
+  }
+}

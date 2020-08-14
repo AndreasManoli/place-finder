@@ -1,0 +1,16 @@
+<div class="header">
+  <h5 class="header-title">
+    {{'TYPE' | translate}}
+  </h5>
+  <mat-icon [matTooltip]="'TYPE_TOOLTIP' | translate" inline="true">info</mat-icon>
+</div>
+<div class="type-selector-wrapper">
+  <mat-form-field class="type-selector" appearance="outline">
+    <mat-label>{{'SELECT_TYPE' | translate}}</mat-label>
+    <mat-select [(ngModel)]="Type" [disabled]="disabled">
+      <mat-option *ngFor="let type of availableTypes" [value]="type">
+        {{type | translate}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

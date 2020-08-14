@@ -1,22 +1,38 @@
 # PlaceFinder
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.2.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.5.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+**Mode**
+
+- Development: `npm build` or `ng build`.
+- Production: `npm run build-prod` or `ng build --prod`.
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+**Mode**
+
+- Testing: `npm test` or `ng test`.
+- Testing with Code Coverage: `npm run test-cc` or `ng test --code-coverage`.
+- Testing using a headless browser: `npm run test-cc-headless` or `ng test --browsers ChromeHeadless`.
+- Testing with Code Coverage using a headless browser: `npm run test-cc-headless` or `ng test --code-coverage --browsers ChromeHeadless`.
+- Testing continuous integration style: `npm run test-ci` or `ng test --code-coverage --watch false --browsers ChromeHeadless`.
+
+## Code linting
+
+`npm run lint` or `ng lint`
+
+## Solution Documentation
+
+**Mode**
+
+- Generate once: `npm run compodoc`
+- Generate and serve: `npm run compodoc-s` and visit [docs](http://127.0.0.1:8080)
+
+## Code scaffolding
+
+Use `ng g -?` to get all available options.
 
 ## Running end-to-end tests
 

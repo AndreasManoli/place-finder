@@ -1,0 +1,5 @@
+<div class="search-wrapper">
+  <app-auto-complete-input (latLng)="setCenter($event)"></app-auto-complete-input>
+  <app-type-selector [disabled]="!latLng" (type)="setPlaces($event)"></app-type-selector>
+  <app-range-selector [disabled]="!latLng" (radius)="setRange($event)"></app-range-selector>
+</div>

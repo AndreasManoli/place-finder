@@ -1,0 +1,19 @@
+:host {
+  .header {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    > .header-title {
+      padding-right: 10px;
+    }
+  }
+
+  .type-selector-wrapper {
+    display: flex;
+    justify-content: center;
+    .type-selector {
+      width: 100%;
+      padding: 10px;
+    }
+  }
+}

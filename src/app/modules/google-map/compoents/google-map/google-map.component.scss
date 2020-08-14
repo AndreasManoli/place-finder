@@ -1,0 +1,38 @@
+:host {
+  .loading {
+    padding: 30px;
+  }
+  ::ng-deep {
+    .map-container {
+      min-width: 100%;
+      min-height: 100%;
+    }
+  }
+
+  .map-info-wrapper {
+    color: black;
+    .title {
+      display: flex;
+      align-items: center;
+      .photo-wrapper {
+        height: 25px;
+        max-width: 25px;
+        background-color: transparent;
+        padding-right: 20px;
+      }
+    }
+    .info {
+      h5 {
+        margin: 5px;
+      }
+      .open {
+        color: green;
+      }
+      .closed {
+        color: red;
+      }
+      display: flex;
+      align-items: center;
+    }
+  }
+}
